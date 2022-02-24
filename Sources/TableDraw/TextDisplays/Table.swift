@@ -12,10 +12,6 @@ public struct Table: TextDisplay {
 
     public var stringValue: String {
         var columnWidths = [Int](repeating: 0, count: self.columns.count)
-        var rowHeights = [Int]()
-        var contentLines = [[Substring]]()
-        var columnIndex = -1
-        var rowIndex = -1
         var hasHeaderTopBorder = false
         var hasHeaderBottomBorder = false
 
@@ -32,6 +28,11 @@ public struct Table: TextDisplay {
             hasHeaderTopBorder = hasHeaderTopBorder || header.topBorder != nil
             hasHeaderBottomBorder = hasHeaderBottomBorder || header.bottomBorder != nil
         }
+
+        var columnIndex = -1
+        var contentLines = [[Substring]]()
+        var rowHeights = [Int]()
+        var rowIndex = -1
 
         for content in self.content {
             columnIndex = ((columnIndex + 1) % self.columns.count)
