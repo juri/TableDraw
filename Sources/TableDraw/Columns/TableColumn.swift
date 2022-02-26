@@ -57,6 +57,20 @@ public struct TableColumn {
         }
     }
 
+    public struct VerticalPadding: Equatable {
+        public var top: Int
+        public var bottom: Int
+
+        public init(top: Int, bottom: Int) {
+            self.top = top
+            self.bottom = bottom
+        }
+
+        public var total: Int { self.top + self.bottom }
+
+        public static let zero = VerticalPadding(top: 0, bottom: 0)
+    }
+
     public var fillCharacter: Character = " "
     public var header: Header?
     public var horizontalAlignment: HorizontalAlignment
@@ -64,6 +78,7 @@ public struct TableColumn {
     public var minWidth: Int = 0
     public var trailingMargin: String = ""
     public var verticalAlignment: VerticalAlignment
+    public var verticalPadding: VerticalPadding = .zero
 
     public init(
         fillCharacter: Character = " ",
@@ -72,7 +87,8 @@ public struct TableColumn {
         leadingMargin: String = "",
         minWidth: Int = 0,
         trailingMargin: String = "",
-        verticalAlignment: VerticalAlignment = .middle
+        verticalAlignment: VerticalAlignment = .middle,
+        verticalPadding: VerticalPadding = .zero
     ) {
         self.fillCharacter = fillCharacter
         self.header = header
@@ -81,5 +97,17 @@ public struct TableColumn {
         self.minWidth = minWidth
         self.trailingMargin = trailingMargin
         self.verticalAlignment = verticalAlignment
+        self.verticalPadding = verticalPadding
+    }
+}
+
+extension TableColumn.VerticalPadding {
+    func apply(lines: [Substring]) -> [Substring] {
+        guard self != Self.zero else { return lines }
+        return (
+            [Substring](repeating: ""[...], count: self.top) +
+                lines +
+                [Substring](repeating: ""[...], count: self.bottom)
+        )
     }
 }

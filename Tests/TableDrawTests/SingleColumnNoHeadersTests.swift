@@ -117,4 +117,36 @@ final class SingleColumnNoHeadersTests: XCTestCase {
             """
         )
     }
+
+    func testVerticalPadding() throws {
+        let col = TableColumn(
+            fillCharacter: ".",
+            horizontalAlignment: .center,
+            minWidth: 16,
+            verticalPadding: .init(top: 1, bottom: 2)
+        )
+        let table = Table(columns: [col]) {
+            "cell1longer"
+            "cell2longest"
+            "cell3"
+        }
+        let output = table.stringValue
+        XCTAssertEqual(
+            output,
+            """
+            ................
+            ..cell1longer...
+            ................
+            ................
+            ................
+            ..cell2longest..
+            ................
+            ................
+            ................
+            .....cell3......
+            ................
+            ................
+            """
+        )
+    }
 }

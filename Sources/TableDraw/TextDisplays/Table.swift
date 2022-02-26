@@ -40,14 +40,14 @@ public struct Table: TextDisplay {
             let text = content.stringValue
             let lines = text.split(separator: "\n")
             contentLines.append(lines)
+            let column = self.columns[columnIndex]
             let oldRowHeight = columnIndex == 0 ? 0 : rowHeights[rowIndex]
-            let newRowHeight = max(oldRowHeight, lines.count)
+            let newRowHeight = max(oldRowHeight, lines.count + column.verticalPadding.total)
             if rowIndex == rowHeights.count {
                 rowHeights.append(newRowHeight)
             } else {
                 rowHeights[rowIndex] = newRowHeight
             }
-            let column = self.columns[columnIndex]
             let textWidth = (
                 lines.reduce(0) { longest, line in max(longest, line.count) } +
                     column.leadingMargin.count +
@@ -134,9 +134,10 @@ public struct Table: TextDisplay {
             let column = self.columns[columnIndex]
             let rowHeight = rowHeights[rowIndex]
             let columnWidth = columnWidths[columnIndex]
-            let verticallyAlignedLines = contentCellLines.count < rowHeight
-                ? column.verticalAlignment.apply(text: contentCellLines, height: rowHeight)
-                : contentCellLines
+            let verticallyPaddedLines = column.verticalPadding.apply(lines: contentCellLines)
+            let verticallyAlignedLines = verticallyPaddedLines.count < rowHeight
+                ? column.verticalAlignment.apply(text: verticallyPaddedLines, height: rowHeight)
+                : verticallyPaddedLines
             let horizontallyAlignedLines = column.horizontalAlignment
                 .apply(
                     text: verticallyAlignedLines,

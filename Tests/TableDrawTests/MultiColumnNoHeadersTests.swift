@@ -305,4 +305,56 @@ final class MultiColumnNoHeadersTests: XCTestCase {
             """
         )
     }
+
+    func testVerticalPadding() throws {
+        let col1 = TableColumn(
+            fillCharacter: ".",
+            horizontalAlignment: .leading,
+            leadingMargin: "# ",
+            minWidth: 12,
+            trailingMargin: "* ",
+            verticalAlignment: .top,
+            verticalPadding: .init(top: 2, bottom: 1)
+        )
+        let col2 = TableColumn(
+            fillCharacter: ".",
+            horizontalAlignment: .center,
+            leadingMargin: " % ",
+            minWidth: 14,
+            trailingMargin: " & ",
+            verticalAlignment: .middle
+        )
+        let col3 = TableColumn(
+            fillCharacter: ".",
+            horizontalAlignment: .trailing,
+            leadingMargin: " :",
+            minWidth: 16,
+            trailingMargin: " ^",
+            verticalAlignment: .bottom
+        )
+        let table = Table(columns: [col1, col2, col3]) {
+            "cell1"
+            "cell2\ncell2line2\ncell2line3"
+            "cell3\ncell3line2"
+
+            "cell4\ncell4line2"
+            "cell5\ncell5line2"
+            "cell6\ncell6line2\ncell6line3"
+        }
+        let output = table.stringValue
+        XCTAssertEqual(
+            output,
+            """
+            # ............*  % ....cell2..... &  :................ ^
+            # ............*  % ..cell2line2.. &  :................ ^
+            # cell1.......*  % ..cell2line3.. &  :...........cell3 ^
+            # ............*  % .............. &  :......cell3line2 ^
+            # ............*  % .............. &  :................ ^
+            # ............*  % ....cell5..... &  :................ ^
+            # cell4.......*  % ..cell5line2.. &  :...........cell6 ^
+            # cell4line2..*  % .............. &  :......cell6line2 ^
+            # ............*  % .............. &  :......cell6line3 ^
+            """
+        )
+    }
 }
