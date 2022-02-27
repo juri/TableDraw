@@ -4,6 +4,11 @@ import XCTest
 final class FrameTests: XCTestCase {
     func testOneColumnWithHeader() throws {
         let col = TableColumn(
+            footer: .init(
+                border: .boxDraw.heavyHorizontal,
+                leadingCorner: .boxDraw.heavyUpAndRight,
+                trailingCorner: .boxDraw.heavyUpAndLeft
+            ),
             header: TableColumn.Header(
                 bottomBorder: .boxDraw.heavyHorizontal,
                 corners: .init(
@@ -37,6 +42,173 @@ final class FrameTests: XCTestCase {
             ┃ ..... ┃
             ┣━━━━━━━┫
             ┃ cell1 ┃
+            ┗━━━━━━━┛
+            """
+        )
+    }
+
+    func testMultiColumnWithHeaderWithoutCorners() throws {
+        let col1 = TableColumn(
+            footer: .init(border: .boxDraw.heavyHorizontal),
+            header: TableColumn.Header(
+                bottomBorder: .boxDraw.heavyHorizontal,
+                fillCharacter: ".",
+                leadingMargin: "\(Character.boxDraw.heavyVertical) ",
+                title: "col1",
+                topBorder: .boxDraw.heavyHorizontal,
+                trailingMargin: " \(Character.boxDraw.heavyVertical)",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading,
+            leadingMargin: "\(Character.boxDraw.heavyVertical) ",
+            trailingMargin: " \(Character.boxDraw.heavyVertical)"
+        )
+        let col2 = TableColumn(
+            footer: .init(border: .boxDraw.heavyHorizontal),
+            header: TableColumn.Header(
+                bottomBorder: .boxDraw.heavyHorizontal,
+                fillCharacter: ".",
+                leadingMargin: " ",
+                title: "col2",
+                topBorder: .boxDraw.heavyHorizontal,
+                trailingMargin: " \(Character.boxDraw.heavyVertical)",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading,
+            leadingMargin: " ",
+            trailingMargin: " \(Character.boxDraw.heavyVertical)"
+        )
+        let col3 = TableColumn(
+            footer: .init(border: .boxDraw.heavyHorizontal),
+            header: TableColumn.Header(
+                bottomBorder: .boxDraw.heavyHorizontal,
+                fillCharacter: ".",
+                leadingMargin: " ",
+                title: "col3",
+                topBorder: .boxDraw.heavyHorizontal,
+                trailingMargin: " \(Character.boxDraw.heavyVertical)",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading,
+            leadingMargin: " ",
+            trailingMargin: " \(Character.boxDraw.heavyVertical)"
+        )
+
+        let table = Table(columns: [col1, col2, col3]) {
+            "cell1"
+            "cell2"
+            "cell3"
+        }
+        let output = table.stringValue
+        XCTAssertEqual(
+            output,
+            """
+            ━━━━━━━━━━━━━━━━━━━━━━━━━
+            ┃ ..... ┃ ..... ┃ ..... ┃
+            ┃ col1. ┃ col2. ┃ col3. ┃
+            ┃ ..... ┃ ..... ┃ ..... ┃
+            ┃ ..... ┃ ..... ┃ ..... ┃
+            ━━━━━━━━━━━━━━━━━━━━━━━━━
+            ┃ cell1 ┃ cell2 ┃ cell3 ┃
+            ━━━━━━━━━━━━━━━━━━━━━━━━━
+            """
+        )
+    }
+
+    func testMultiColumnWithHeader() throws {
+        let col1 = TableColumn(
+            footer: .init(
+                border: .boxDraw.heavyHorizontal,
+                leadingCorner: .boxDraw.heavyUpAndRight,
+                trailingCorner: .boxDraw.heavyUpAndHorizontal
+            ),
+            header: TableColumn.Header(
+                bottomBorder: .boxDraw.heavyHorizontal,
+                corners: .init(
+                    topLeading: .boxDraw.heavyDownAndRight,
+                    topTrailing: .boxDraw.heavyDownAndHorizontal,
+                    bottomTrailing: .boxDraw.heavyUpAndHorizontal,
+                    bottomLeading: .boxDraw.heavyVerticalAndRight
+                ),
+                fillCharacter: ".",
+                leadingMargin: "\(Character.boxDraw.heavyVertical) ",
+                title: "col1",
+                topBorder: .boxDraw.heavyHorizontal,
+                trailingMargin: " \(Character.boxDraw.heavyVertical)",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading,
+            leadingMargin: "\(Character.boxDraw.heavyVertical) ",
+            trailingMargin: " \(Character.boxDraw.heavyVertical)"
+        )
+        let col2 = TableColumn(
+            footer: .init(
+                border: .boxDraw.heavyHorizontal,
+                leadingCorner: nil,
+                trailingCorner: .boxDraw.heavyUpAndHorizontal
+            ),
+            header: TableColumn.Header(
+                bottomBorder: .boxDraw.heavyHorizontal,
+                corners: .init(
+                    topLeading: .boxDraw.heavyHorizontal,
+                    topTrailing: .boxDraw.heavyDownAndHorizontal,
+                    bottomTrailing: .boxDraw.heavyVerticalAndHorizontal,
+                    bottomLeading: .boxDraw.heavyHorizontal
+                ),
+                fillCharacter: ".",
+                leadingMargin: " ",
+                title: "col2",
+                topBorder: .boxDraw.heavyHorizontal,
+                trailingMargin: " \(Character.boxDraw.heavyVertical)",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading,
+            leadingMargin: " ",
+            trailingMargin: " \(Character.boxDraw.heavyVertical)"
+        )
+        let col3 = TableColumn(
+            footer: .init(
+                border: .boxDraw.heavyHorizontal,
+                leadingCorner: nil,
+                trailingCorner: .boxDraw.heavyUpAndLeft
+            ),
+            header: TableColumn.Header(
+                bottomBorder: .boxDraw.heavyHorizontal,
+                corners: .init(
+                    topLeading: .boxDraw.heavyHorizontal,
+                    topTrailing: .boxDraw.heavyDownAndLeft,
+                    bottomTrailing: .boxDraw.heavyVerticalAndLeft,
+                    bottomLeading: .boxDraw.heavyHorizontal
+                ),
+                fillCharacter: ".",
+                leadingMargin: " ",
+                title: "col3",
+                topBorder: .boxDraw.heavyHorizontal,
+                trailingMargin: " \(Character.boxDraw.heavyVertical)",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading,
+            leadingMargin: " ",
+            trailingMargin: " \(Character.boxDraw.heavyVertical)"
+        )
+
+        let table = Table(columns: [col1, col2, col3]) {
+            "cell1"
+            "cell2"
+            "cell3"
+        }
+        let output = table.stringValue
+        XCTAssertEqual(
+            output,
+            """
+            ┏━━━━━━━┳━━━━━━━┳━━━━━━━┓
+            ┃ ..... ┃ ..... ┃ ..... ┃
+            ┃ col1. ┃ col2. ┃ col3. ┃
+            ┃ ..... ┃ ..... ┃ ..... ┃
+            ┃ ..... ┃ ..... ┃ ..... ┃
+            ┣━━━━━━━┻━━━━━━━╋━━━━━━━┫
+            ┃ cell1 ┃ cell2 ┃ cell3 ┃
+            ┗━━━━━━━┻━━━━━━━┻━━━━━━━┛
             """
         )
     }

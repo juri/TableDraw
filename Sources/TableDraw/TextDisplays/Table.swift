@@ -57,7 +57,9 @@ public struct Table: TextDisplay {
             columnWidths[columnIndex] = max(textWidth, columnWidths[columnIndex])
         }
 
-        let totalLineCount = rowHeights.reduce(0, +)
+        let hasVisibleFooter = self.columns.contains(where: \.visibleFooter)
+        let footerHeight = hasVisibleFooter ? 1 : 0
+        let totalLineCount = rowHeights.reduce(0, +) + footerHeight
         var outputLines = [String](repeating: "", count: totalLineCount + headerHeight)
 
         // Draw headers
@@ -156,6 +158,25 @@ public struct Table: TextDisplay {
             }
             if columnIndex == self.columns.count - 1 {
                 startLine += rowHeight
+            }
+        }
+
+        if hasVisibleFooter {
+            let lastIndex = outputLines.endIndex - 1
+            for (columnIndex, column) in zip(0..., self.columns) {
+                let columnWidth = columnWidths[columnIndex]
+                if let footer = column.footer {
+                    let length = columnWidth - footer.cornerLength
+                    if let corner = footer.leadingCorner {
+                        outputLines[lastIndex].append(corner)
+                    }
+                    outputLines[lastIndex].append(String(repeating: footer.border ?? " ", count: length))
+                    if let corner = footer.trailingCorner {
+                        outputLines[lastIndex].append(corner)
+                    }
+                } else {
+                    outputLines[lastIndex].append(String(repeating: " ", count: columnWidth))
+                }
             }
         }
 

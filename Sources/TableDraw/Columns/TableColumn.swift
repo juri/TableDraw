@@ -39,6 +39,22 @@ public struct TableColumn {
         }
     }
 
+    public struct Footer {
+        var border: Character?
+        var leadingCorner: Character?
+        var trailingCorner: Character?
+
+        public init(
+            border: Character? = nil,
+            leadingCorner: Character? = nil,
+            trailingCorner: Character? = nil
+        ) {
+            self.border = border
+            self.leadingCorner = leadingCorner
+            self.trailingCorner = trailingCorner
+        }
+    }
+
     public struct Corners {
         public var topLeading: Character?
         public var topTrailing: Character?
@@ -75,6 +91,7 @@ public struct TableColumn {
     }
 
     public var fillCharacter: Character
+    public var footer: Footer?
     public var header: Header?
     public var horizontalAlignment: HorizontalAlignment
     public var leadingMargin: String
@@ -85,6 +102,7 @@ public struct TableColumn {
 
     public init(
         fillCharacter: Character = " ",
+        footer: Footer? = nil,
         header: TableColumn.Header? = nil,
         horizontalAlignment: HorizontalAlignment = .leading,
         leadingMargin: String = "",
@@ -94,6 +112,7 @@ public struct TableColumn {
         verticalPadding: VerticalPadding = .zero
     ) {
         self.fillCharacter = fillCharacter
+        self.footer = footer
         self.header = header
         self.horizontalAlignment = horizontalAlignment
         self.leadingMargin = leadingMargin
@@ -107,6 +126,22 @@ public struct TableColumn {
 extension TableColumn.Header {
     var decorationHeight: Int {
         (self.bottomBorder != nil ? 1 : 0) + (self.topBorder != nil ? 1 : 0) + self.verticalPadding.total
+    }
+}
+
+extension TableColumn.Footer {
+    var visible: Bool {
+        self.border != nil || self.leadingCorner != nil || self.trailingCorner != nil
+    }
+
+    var cornerLength: Int {
+        (self.leadingCorner != nil ? 1 : 0) + (self.trailingCorner != nil ? 1 : 0)
+    }
+}
+
+extension TableColumn {
+    var visibleFooter: Bool {
+        self.footer.map(\.visible) ?? false
     }
 }
 
