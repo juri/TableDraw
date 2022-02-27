@@ -2,7 +2,7 @@ import TableDraw
 import XCTest
 
 final class FrameTests: XCTestCase {
-    func testOneRow() throws {
+    func testOneColumnWithHeader() throws {
         let col = TableColumn(
             header: TableColumn.Header(
                 bottomBorder: .boxDraw.heavyHorizontal,
