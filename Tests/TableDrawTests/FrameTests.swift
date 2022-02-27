@@ -16,7 +16,8 @@ final class FrameTests: XCTestCase {
                 leadingMargin: "\(Character.boxDraw.heavyVertical) ",
                 title: "head",
                 topBorder: .boxDraw.heavyHorizontal,
-                trailingMargin: " \(Character.boxDraw.heavyVertical)"
+                trailingMargin: " \(Character.boxDraw.heavyVertical)",
+                verticalPadding: .init(top: 1, bottom: 2)
             ),
             horizontalAlignment: .leading,
             leadingMargin: "\(Character.boxDraw.heavyVertical) ",
@@ -30,7 +31,10 @@ final class FrameTests: XCTestCase {
             output,
             """
             ┏━━━━━━━┓
+            ┃ ..... ┃
             ┃ head. ┃
+            ┃ ..... ┃
+            ┃ ..... ┃
             ┣━━━━━━━┫
             ┃ cell1 ┃
             """

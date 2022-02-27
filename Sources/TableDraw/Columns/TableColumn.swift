@@ -10,6 +10,7 @@ public struct TableColumn {
         public var topBorder: Character?
         public var trailingMargin: String = ""
         public var verticalAlignment: VerticalAlignment = .middle
+        public var verticalPadding: VerticalPadding
 
         public init(
             bottomBorder: Character? = nil,
@@ -21,7 +22,8 @@ public struct TableColumn {
             title: String,
             topBorder: Character? = nil,
             trailingMargin: String = "",
-            verticalAlignment: VerticalAlignment = .middle
+            verticalAlignment: VerticalAlignment = .middle,
+            verticalPadding: VerticalPadding = .zero
         ) {
             self.bottomBorder = bottomBorder
             self.corners = corners
@@ -33,6 +35,7 @@ public struct TableColumn {
             self.topBorder = topBorder
             self.trailingMargin = trailingMargin
             self.verticalAlignment = verticalAlignment
+            self.verticalPadding = verticalPadding
         }
     }
 
@@ -103,7 +106,7 @@ public struct TableColumn {
 
 extension TableColumn.Header {
     var decorationHeight: Int {
-        (self.bottomBorder != nil ? 1 : 0) + (self.topBorder != nil ? 1 : 0)
+        (self.bottomBorder != nil ? 1 : 0) + (self.topBorder != nil ? 1 : 0) + self.verticalPadding.total
     }
 }
 

@@ -69,8 +69,10 @@ public struct Table: TextDisplay {
                 }
                 continue
             }
+            let headerLines = header.title.split(separator: "\n")
+            let paddedLines = header.verticalPadding.apply(lines: headerLines)
             let verticallyAlignedLines = header.verticalAlignment.apply(
-                text: header.title.split(separator: "\n"),
+                text: paddedLines,
                 height: headerHeight - (hasHeaderTopBorder ? 1 : 0) - (hasHeaderBottomBorder ? 1 : 0)
             )
             let horizontallyAlignedLines = header.horizontalAlignment
