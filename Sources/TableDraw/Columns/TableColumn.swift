@@ -1,15 +1,15 @@
 public struct TableColumn {
     public struct Header {
         public var bottomBorder: Character?
-        public var corners: Corners = .defaults
-        public var fillCharacter: Character = " "
-        public var horizontalAlignment: HorizontalAlignment = .leading
-        public var leadingMargin: String = ""
-        public var minHeight: Int = 0
+        public var corners: Corners
+        public var fillCharacter: Character
+        public var horizontalAlignment: HorizontalAlignment
+        public var leadingMargin: String
+        public var minHeight: Int
         public var title: String
         public var topBorder: Character?
-        public var trailingMargin: String = ""
-        public var verticalAlignment: VerticalAlignment = .middle
+        public var trailingMargin: String
+        public var verticalAlignment: VerticalAlignment
         public var verticalPadding: VerticalPadding
 
         public init(
@@ -74,14 +74,14 @@ public struct TableColumn {
         public static let zero = VerticalPadding(top: 0, bottom: 0)
     }
 
-    public var fillCharacter: Character = " "
+    public var fillCharacter: Character
     public var header: Header?
     public var horizontalAlignment: HorizontalAlignment
-    public var leadingMargin: String = ""
-    public var minWidth: Int = 0
-    public var trailingMargin: String = ""
+    public var leadingMargin: String
+    public var minWidth: Int
+    public var trailingMargin: String
     public var verticalAlignment: VerticalAlignment
-    public var verticalPadding: VerticalPadding = .zero
+    public var verticalPadding: VerticalPadding
 
     public init(
         fillCharacter: Character = " ",
