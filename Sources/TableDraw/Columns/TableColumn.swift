@@ -101,6 +101,12 @@ public struct TableColumn {
     }
 }
 
+extension TableColumn.Header {
+    var decorationHeight: Int {
+        (self.bottomBorder != nil ? 1 : 0) + (self.topBorder != nil ? 1 : 0)
+    }
+}
+
 extension TableColumn.VerticalPadding {
     func apply(lines: [Substring]) -> [Substring] {
         guard self != Self.zero else { return lines }

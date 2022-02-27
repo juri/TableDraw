@@ -23,7 +23,7 @@ public struct Table: TextDisplay {
             let headerWidth = headerContentWidth + header.leadingMargin.count + header.trailingMargin.count
             columnWidths[columnIndex] = headerWidth
             let contentHeight = max(headerLines.count, header.minHeight)
-            let height = contentHeight + (header.bottomBorder != nil ? 1 : 0) + (header.topBorder != nil ? 1 : 0)
+            let height = contentHeight + header.decorationHeight
             headerHeight = max(headerHeight, height)
             hasHeaderTopBorder = hasHeaderTopBorder || header.topBorder != nil
             hasHeaderBottomBorder = hasHeaderBottomBorder || header.bottomBorder != nil
