@@ -95,12 +95,13 @@ public enum TableBorderStyle {
 extension TableColumn {
     public static func configureBorders(
         in columns: inout [TableColumn],
-        uniformStyle style: TableBorderStyle
+        uniformStyle style: TableBorderStyle,
+        horizontalMargin: String = " "
     ) {
         guard !columns.isEmpty else { return }
         let multipleColumns = columns.count > 1
-        columns[0].leadingMargin = "\(style.vertical) "
-        columns[0].trailingMargin = " \(style.vertical)"
+        columns[0].leadingMargin = "\(style.vertical)\(horizontalMargin)"
+        columns[0].trailingMargin = "\(horizontalMargin)\(style.vertical)"
         columns[0].footer = .init(
             border: style.horizontal,
             leadingCorner: style.upAndRight,
@@ -108,8 +109,8 @@ extension TableColumn {
         )
         columns[0].header?.bottomBorder = style.horizontal
         columns[0].header?.topBorder = style.horizontal
-        columns[0].header?.leadingMargin = "\(style.vertical) "
-        columns[0].header?.trailingMargin = " \(style.vertical)"
+        columns[0].header?.leadingMargin = "\(style.vertical)\(horizontalMargin)"
+        columns[0].header?.trailingMargin = "\(horizontalMargin)\(style.vertical)"
         columns[0].header?.corners = .init(
             topLeading: style.downAndRight,
             topTrailing: multipleColumns ? style.downAndHorizontal : style.downAndLeft,
@@ -121,8 +122,8 @@ extension TableColumn {
         guard lastIndex > 0 else { return }
 
         for index in 1 ..< lastIndex {
-            columns[index].leadingMargin = " "
-            columns[index].trailingMargin = " \(style.vertical)"
+            columns[index].leadingMargin = "\(horizontalMargin)"
+            columns[index].trailingMargin = "\(horizontalMargin)\(style.vertical)"
             columns[index].footer = .init(
                 border: style.horizontal,
                 leadingCorner: nil,
@@ -130,8 +131,8 @@ extension TableColumn {
             )
             columns[index].header?.bottomBorder = style.horizontal
             columns[index].header?.topBorder = style.horizontal
-            columns[index].header?.leadingMargin = " "
-            columns[index].header?.trailingMargin = " \(style.vertical)"
+            columns[index].header?.leadingMargin = "\(horizontalMargin)"
+            columns[index].header?.trailingMargin = "\(horizontalMargin)\(style.vertical)"
             columns[index].header?.corners = .init(
                 topLeading: style.horizontal,
                 topTrailing: style.downAndHorizontal,
@@ -140,8 +141,8 @@ extension TableColumn {
             )
         }
 
-        columns[lastIndex].leadingMargin = " "
-        columns[lastIndex].trailingMargin = " \(style.vertical)"
+        columns[lastIndex].leadingMargin = "\(horizontalMargin)"
+        columns[lastIndex].trailingMargin = "\(horizontalMargin)\(style.vertical)"
         columns[lastIndex].footer = .init(
             border: style.horizontal,
             leadingCorner: style.horizontal,
@@ -149,8 +150,8 @@ extension TableColumn {
         )
         columns[lastIndex].header?.bottomBorder = style.horizontal
         columns[lastIndex].header?.topBorder = style.horizontal
-        columns[lastIndex].header?.leadingMargin = " "
-        columns[lastIndex].header?.trailingMargin = " \(style.vertical)"
+        columns[lastIndex].header?.leadingMargin = "\(horizontalMargin)"
+        columns[lastIndex].header?.trailingMargin = "\(horizontalMargin)\(style.vertical)"
         columns[lastIndex].header?.corners = .init(
             topLeading: style.horizontal,
             topTrailing: style.downAndLeft,
