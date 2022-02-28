@@ -127,7 +127,7 @@ final class FrameTests: XCTestCase {
                 corners: .init(
                     topLeading: .boxDraw.heavyDownAndRight,
                     topTrailing: .boxDraw.heavyDownAndHorizontal,
-                    bottomTrailing: .boxDraw.heavyUpAndHorizontal,
+                    bottomTrailing: .boxDraw.heavyVerticalAndHorizontal,
                     bottomLeading: .boxDraw.heavyVerticalAndRight
                 ),
                 fillCharacter: ".",
@@ -206,7 +206,7 @@ final class FrameTests: XCTestCase {
             ┃ col1. ┃ col2. ┃ col3. ┃
             ┃ ..... ┃ ..... ┃ ..... ┃
             ┃ ..... ┃ ..... ┃ ..... ┃
-            ┣━━━━━━━┻━━━━━━━╋━━━━━━━┫
+            ┣━━━━━━━╋━━━━━━━╋━━━━━━━┫
             ┃ cell1 ┃ cell2 ┃ cell3 ┃
             ┗━━━━━━━┻━━━━━━━┻━━━━━━━┛
             """
