@@ -212,4 +212,151 @@ final class FrameTests: XCTestCase {
             """
         )
     }
+
+    func testMultiColumnWithHeaderWithConfiguredDoubleBorders() throws {
+        let col1 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col1",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+        let col2 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col2",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+        let col3 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col3",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+
+        let cols = TableColumn.configureBorders(in: [col1, col2, col3], uniformStyle: .double)
+
+        let table = Table(columns: cols) {
+            "cell1"
+            "cell2"
+            "cell3"
+        }
+        let output = table.stringValue
+        XCTAssertEqual(
+            output,
+            """
+            ╔═══════╦═══════╦═══════╗
+            ║ ..... ║ ..... ║ ..... ║
+            ║ col1. ║ col2. ║ col3. ║
+            ║ ..... ║ ..... ║ ..... ║
+            ║ ..... ║ ..... ║ ..... ║
+            ╠═══════╬═══════╬═══════╣
+            ║ cell1 ║ cell2 ║ cell3 ║
+            ╚═══════╩═══════╩═══════╝
+            """
+        )
+    }
+
+    func testMultiColumnWithHeaderWithConfiguredHeavyBorders() throws {
+        let col1 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col1",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+        let col2 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col2",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+        let col3 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col3",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+
+        let cols = TableColumn.configureBorders(in: [col1, col2, col3], uniformStyle: .heavy)
+
+        let table = Table(columns: cols) {
+            "cell1"
+            "cell2"
+            "cell3"
+        }
+        let output = table.stringValue
+        XCTAssertEqual(
+            output,
+            """
+            ┏━━━━━━━┳━━━━━━━┳━━━━━━━┓
+            ┃ ..... ┃ ..... ┃ ..... ┃
+            ┃ col1. ┃ col2. ┃ col3. ┃
+            ┃ ..... ┃ ..... ┃ ..... ┃
+            ┃ ..... ┃ ..... ┃ ..... ┃
+            ┣━━━━━━━╋━━━━━━━╋━━━━━━━┫
+            ┃ cell1 ┃ cell2 ┃ cell3 ┃
+            ┗━━━━━━━┻━━━━━━━┻━━━━━━━┛
+            """
+        )
+    }
+
+    func testMultiColumnWithHeaderWithConfiguredLightBorders() throws {
+        let col1 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col1",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+        let col2 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col2",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+        let col3 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col3",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+
+        let cols = TableColumn.configureBorders(in: [col1, col2, col3], uniformStyle: .light)
+
+        let table = Table(columns: cols) {
+            "cell1"
+            "cell2"
+            "cell3"
+        }
+        let output = table.stringValue
+        XCTAssertEqual(
+            output,
+            """
+            ┌───────┬───────┬───────┐
+            │ ..... │ ..... │ ..... │
+            │ col1. │ col2. │ col3. │
+            │ ..... │ ..... │ ..... │
+            │ ..... │ ..... │ ..... │
+            ├───────┼───────┼───────┤
+            │ cell1 │ cell2 │ cell3 │
+            └───────┴───────┴───────┘
+            """
+        )
+    }
 }
