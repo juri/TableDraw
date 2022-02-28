@@ -360,6 +360,55 @@ final class FrameTests: XCTestCase {
         )
     }
 
+    func testMultiColumnWithHeaderWithConfiguredHeavyQuadrupleDashBorders() throws {
+        let col1 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col1",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+        let col2 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col2",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+        let col3 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col3",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+
+        let cols = TableColumn.configureBorders(in: [col1, col2, col3], uniformStyle: .heavyQuadrupleDash)
+
+        let table = Table(columns: cols) {
+            "cell1"
+            "cell2"
+            "cell3"
+        }
+        let output = table.stringValue
+        XCTAssertEqual(
+            output,
+            """
+            ┏┉┉┉┉┉┉┉┳┉┉┉┉┉┉┉┳┉┉┉┉┉┉┉┓
+            ┋ ..... ┋ ..... ┋ ..... ┋
+            ┋ col1. ┋ col2. ┋ col3. ┋
+            ┋ ..... ┋ ..... ┋ ..... ┋
+            ┋ ..... ┋ ..... ┋ ..... ┋
+            ┣┉┉┉┉┉┉┉╋┉┉┉┉┉┉┉╋┉┉┉┉┉┉┉┫
+            ┋ cell1 ┋ cell2 ┋ cell3 ┋
+            ┗┉┉┉┉┉┉┉┻┉┉┉┉┉┉┉┻┉┉┉┉┉┉┉┛
+            """
+        )
+    }
+
     func testMultiColumnWithHeaderWithConfiguredHeavyTripleDashBorders() throws {
         let col1 = TableColumn(
             header: TableColumn.Header(
@@ -405,6 +454,59 @@ final class FrameTests: XCTestCase {
             ┣┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┫
             ┇ cell1 ┇ cell2 ┇ cell3 ┇
             ┗┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┛
+            """
+        )
+    }
+
+    func testMultiColumnWithHeaderWithConfiguredLightQuadrupleDashBorders() throws {
+        let col1 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col1",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+        let col2 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col2",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+        let col3 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col3",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+
+        let cols = TableColumn.configureBorders(
+            in: [col1, col2, col3],
+            uniformStyle: .lightQuadrupleDash,
+            horizontalMargin: "  "
+        )
+
+        let table = Table(columns: cols) {
+            "cell1"
+            "cell2"
+            "cell3"
+        }
+        let output = table.stringValue
+        XCTAssertEqual(
+            output,
+            """
+            ┌┈┈┈┈┈┈┈┈┈┬┈┈┈┈┈┈┈┈┈┬┈┈┈┈┈┈┈┈┈┐
+            ┊  .....  ┊  .....  ┊  .....  ┊
+            ┊  col1.  ┊  col2.  ┊  col3.  ┊
+            ┊  .....  ┊  .....  ┊  .....  ┊
+            ┊  .....  ┊  .....  ┊  .....  ┊
+            ├┈┈┈┈┈┈┈┈┈┼┈┈┈┈┈┈┈┈┈┼┈┈┈┈┈┈┈┈┈┤
+            ┊  cell1  ┊  cell2  ┊  cell3  ┊
+            └┈┈┈┈┈┈┈┈┈┴┈┈┈┈┈┈┈┈┈┴┈┈┈┈┈┈┈┈┈┘
             """
         )
     }
@@ -461,5 +563,4 @@ final class FrameTests: XCTestCase {
             """
         )
     }
-
 }

@@ -1,16 +1,20 @@
 public enum TableBorderStyle {
     case double
     case heavy
+    case heavyQuadrupleDash
     case heavyTripleDash
     case light
+    case lightQuadrupleDash
     case lightTripleDash
 
     var horizontal: Character {
         switch self {
         case .double: return .boxDraw.doubleHorizontal
         case .heavy: return .boxDraw.heavyHorizontal
+        case .heavyQuadrupleDash: return .boxDraw.heavyQuadrupleDashHorizontal
         case .heavyTripleDash: return .boxDraw.heavyTripleDashHorizontal
         case .light: return .boxDraw.lightHorizontal
+        case .lightQuadrupleDash: return .boxDraw.lightQuadrupleDashHorizontal
         case .lightTripleDash: return .boxDraw.lightTripleDashHorizontal
         }
     }
@@ -19,8 +23,10 @@ public enum TableBorderStyle {
         switch self {
         case .double: return .boxDraw.doubleVertical
         case .heavy: return .boxDraw.heavyVertical
+        case .heavyQuadrupleDash: return .boxDraw.heavyQuadrupleDashVertical
         case .heavyTripleDash: return .boxDraw.heavyTripleDashVertical
         case .light: return .boxDraw.lightVertical
+        case .lightQuadrupleDash: return .boxDraw.lightQuadrupleDashVertical
         case .lightTripleDash: return .boxDraw.lightTripleDashVertical
         }
     }
@@ -29,8 +35,10 @@ public enum TableBorderStyle {
         switch self {
         case .double: return .boxDraw.doubleDownAndLeft
         case .heavy: return .boxDraw.heavyDownAndLeft
+        case .heavyQuadrupleDash: return .boxDraw.heavyDownAndLeft
         case .heavyTripleDash: return .boxDraw.heavyDownAndLeft
         case .light: return .boxDraw.lightDownAndLeft
+        case .lightQuadrupleDash: return .boxDraw.lightDownAndLeft
         case .lightTripleDash: return .boxDraw.lightDownAndLeft
         }
     }
@@ -39,8 +47,10 @@ public enum TableBorderStyle {
         switch self {
         case .double: return .boxDraw.doubleDownAndRight
         case .heavy: return .boxDraw.heavyDownAndRight
+        case .heavyQuadrupleDash: return .boxDraw.heavyDownAndRight
         case .heavyTripleDash: return .boxDraw.heavyDownAndRight
         case .light: return .boxDraw.lightDownAndRight
+        case .lightQuadrupleDash: return .boxDraw.lightDownAndRight
         case .lightTripleDash: return .boxDraw.lightDownAndRight
         }
     }
@@ -49,8 +59,10 @@ public enum TableBorderStyle {
         switch self {
         case .double: return .boxDraw.doubleUpAndLeft
         case .heavy: return .boxDraw.heavyUpAndLeft
+        case .heavyQuadrupleDash: return .boxDraw.heavyUpAndLeft
         case .heavyTripleDash: return .boxDraw.heavyUpAndLeft
         case .light: return .boxDraw.lightUpAndLeft
+        case .lightQuadrupleDash: return .boxDraw.lightUpAndLeft
         case .lightTripleDash: return .boxDraw.lightUpAndLeft
         }
     }
@@ -59,8 +71,10 @@ public enum TableBorderStyle {
         switch self {
         case .double: return .boxDraw.doubleUpAndRight
         case .heavy: return .boxDraw.heavyUpAndRight
+        case .heavyQuadrupleDash: return .boxDraw.heavyUpAndRight
         case .heavyTripleDash: return .boxDraw.heavyUpAndRight
         case .light: return .boxDraw.lightUpAndRight
+        case .lightQuadrupleDash: return .boxDraw.lightUpAndRight
         case .lightTripleDash: return .boxDraw.lightUpAndRight
         }
     }
@@ -69,8 +83,10 @@ public enum TableBorderStyle {
         switch self {
         case .double: return .boxDraw.doubleUpAndHorizontal
         case .heavy: return .boxDraw.heavyUpAndHorizontal
+        case .heavyQuadrupleDash: return .boxDraw.heavyUpAndHorizontal
         case .heavyTripleDash: return .boxDraw.heavyUpAndHorizontal
         case .light: return .boxDraw.lightUpAndHorizontal
+        case .lightQuadrupleDash: return .boxDraw.lightUpAndHorizontal
         case .lightTripleDash: return .boxDraw.lightUpAndHorizontal
         }
     }
@@ -79,8 +95,10 @@ public enum TableBorderStyle {
         switch self {
         case .double: return .boxDraw.doubleDownAndHorizontal
         case .heavy: return .boxDraw.heavyDownAndHorizontal
+        case .heavyQuadrupleDash: return .boxDraw.heavyDownAndHorizontal
         case .heavyTripleDash: return .boxDraw.heavyDownAndHorizontal
         case .light: return .boxDraw.lightDownAndHorizontal
+        case .lightQuadrupleDash: return .boxDraw.lightDownAndHorizontal
         case .lightTripleDash: return .boxDraw.lightDownAndHorizontal
         }
     }
@@ -89,8 +107,10 @@ public enum TableBorderStyle {
         switch self {
         case .double: return .boxDraw.doubleVerticalAndLeft
         case .heavy: return .boxDraw.heavyVerticalAndLeft
+        case .heavyQuadrupleDash: return .boxDraw.heavyVerticalAndLeft
         case .heavyTripleDash: return .boxDraw.heavyVerticalAndLeft
         case .light: return .boxDraw.lightVerticalAndLeft
+        case .lightQuadrupleDash: return .boxDraw.lightVerticalAndLeft
         case .lightTripleDash: return .boxDraw.lightVerticalAndLeft
         }
     }
@@ -99,8 +119,10 @@ public enum TableBorderStyle {
         switch self {
         case .double: return .boxDraw.doubleVerticalAndRight
         case .heavy: return .boxDraw.heavyVerticalAndRight
+        case .heavyQuadrupleDash: return .boxDraw.heavyVerticalAndRight
         case .heavyTripleDash: return .boxDraw.heavyVerticalAndRight
         case .light: return .boxDraw.lightVerticalAndRight
+        case .lightQuadrupleDash: return .boxDraw.lightVerticalAndRight
         case .lightTripleDash: return .boxDraw.lightVerticalAndRight
         }
     }
@@ -109,8 +131,10 @@ public enum TableBorderStyle {
         switch self {
         case .double: return .boxDraw.doubleVerticalAndHorizontal
         case .heavy: return .boxDraw.heavyVerticalAndHorizontal
+        case .heavyQuadrupleDash: return .boxDraw.heavyVerticalAndHorizontal
         case .heavyTripleDash: return .boxDraw.heavyVerticalAndHorizontal
         case .light: return .boxDraw.lightVerticalAndHorizontal
+        case .lightQuadrupleDash: return .boxDraw.lightVerticalAndHorizontal
         case .lightTripleDash: return .boxDraw.lightVerticalAndHorizontal
         }
     }
