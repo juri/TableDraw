@@ -217,4 +217,69 @@ extension TableColumn {
         self.configureBorders(in: &cols, uniformStyle: style, horizontalMargin: horizontalMargin)
         return cols
     }
+
+    public static func configureBorders(
+        in columns: inout [TableColumn],
+        internalOnlyUniformStyle style: TableBorderStyle,
+        horizontalMargin: String = " "
+    ) {
+        guard !columns.isEmpty else { return }
+        let multipleColumns = columns.count > 1
+        columns[0].leadingMargin = horizontalMargin
+        columns[0].trailingMargin = "\(horizontalMargin)\(style.vertical)"
+        columns[0].footer = nil
+        columns[0].header?.bottomBorder = style.horizontal
+        columns[0].header?.topBorder = nil
+        columns[0].header?.leadingMargin = horizontalMargin
+        columns[0].header?.trailingMargin = "\(horizontalMargin)\(style.vertical)"
+        columns[0].header?.corners = .init(
+            topLeading: nil,
+            topTrailing: nil,
+            bottomTrailing: multipleColumns ? style.verticalAndHorizontal : style.upAndLeft,
+            bottomLeading: nil
+        )
+
+        let lastIndex = columns.endIndex.advanced(by: -1)
+        guard lastIndex > 0 else { return }
+
+        for index in 1 ..< lastIndex {
+            columns[index].leadingMargin = "\(horizontalMargin)"
+            columns[index].trailingMargin = "\(horizontalMargin)\(style.vertical)"
+            columns[index].footer = nil
+            columns[index].header?.bottomBorder = style.horizontal
+            columns[index].header?.topBorder = nil
+            columns[index].header?.leadingMargin = "\(horizontalMargin)"
+            columns[index].header?.trailingMargin = "\(horizontalMargin)\(style.vertical)"
+            columns[index].header?.corners = .init(
+                topLeading: nil,
+                topTrailing: nil,
+                bottomTrailing: style.verticalAndHorizontal,
+                bottomLeading: style.horizontal
+            )
+        }
+
+        columns[lastIndex].leadingMargin = "\(horizontalMargin)"
+        columns[lastIndex].trailingMargin = horizontalMargin
+        columns[lastIndex].footer = nil
+        columns[lastIndex].header?.bottomBorder = style.horizontal
+        columns[lastIndex].header?.topBorder = nil
+        columns[lastIndex].header?.leadingMargin = horizontalMargin
+        columns[lastIndex].header?.trailingMargin = horizontalMargin
+        columns[lastIndex].header?.corners = .init(
+            topLeading: nil,
+            topTrailing: nil,
+            bottomTrailing: nil,
+            bottomLeading: style.horizontal
+        )
+    }
+
+    public static func configureBorders(
+        in columns: [TableColumn],
+        internalOnlyUniformStyle style: TableBorderStyle,
+        horizontalMargin: String = " "
+    ) -> [TableColumn] {
+        var cols = columns
+        self.configureBorders(in: &cols, internalOnlyUniformStyle: style, horizontalMargin: horizontalMargin)
+        return cols
+    }
 }
