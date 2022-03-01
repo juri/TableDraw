@@ -655,4 +655,39 @@ final class FrameTests: XCTestCase {
             """
         )
     }
+
+    func testSingleColumnWithHeaderWithConfiguredOnlyInternalDoubleBorders() throws {
+        let col1 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col1",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+
+        let cols = TableColumn.configureBorders(
+            in: [col1],
+            internalOnlyUniformStyle: .double,
+            horizontalMargin: ""
+        )
+
+        let table = Table(columns: cols) {
+            "cell1"
+            "cell2"
+        }
+        let output = table.stringValue
+        XCTAssertEqual(
+            output,
+            """
+            .....
+            col1.
+            .....
+            .....
+            ═════
+            cell1
+            cell2
+            """
+        )
+    }
 }

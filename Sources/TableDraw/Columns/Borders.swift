@@ -226,16 +226,16 @@ extension TableColumn {
         guard !columns.isEmpty else { return }
         let multipleColumns = columns.count > 1
         columns[0].leadingMargin = horizontalMargin
-        columns[0].trailingMargin = "\(horizontalMargin)\(style.vertical)"
+        columns[0].trailingMargin = multipleColumns ? "\(horizontalMargin)\(style.vertical)" : horizontalMargin
         columns[0].footer = nil
         columns[0].header?.bottomBorder = style.horizontal
         columns[0].header?.topBorder = nil
         columns[0].header?.leadingMargin = horizontalMargin
-        columns[0].header?.trailingMargin = "\(horizontalMargin)\(style.vertical)"
+        columns[0].header?.trailingMargin = multipleColumns ? "\(horizontalMargin)\(style.vertical)" : horizontalMargin
         columns[0].header?.corners = .init(
             topLeading: nil,
             topTrailing: nil,
-            bottomTrailing: multipleColumns ? style.verticalAndHorizontal : style.upAndLeft,
+            bottomTrailing: multipleColumns ? style.verticalAndHorizontal : nil,
             bottomLeading: nil
         )
 
