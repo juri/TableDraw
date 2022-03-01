@@ -162,7 +162,7 @@ extension TableColumn {
         columns[0].header?.corners = .init(
             topLeading: style.downAndRight,
             topTrailing: multipleColumns ? style.downAndHorizontal : style.downAndLeft,
-            bottomTrailing: multipleColumns ? style.verticalAndHorizontal : style.upAndLeft,
+            bottomTrailing: multipleColumns ? style.verticalAndHorizontal : style.verticalAndLeft,
             bottomLeading: style.verticalAndRight
         )
 

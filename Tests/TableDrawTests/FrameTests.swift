@@ -213,6 +213,43 @@ final class FrameTests: XCTestCase {
         )
     }
 
+    func testSingleColumnWithHeaderWithConfiguredLightTripleDashBorders() throws {
+        let col1 = TableColumn(
+            header: TableColumn.Header(
+                fillCharacter: ".",
+                title: "col1",
+                verticalPadding: .init(top: 1, bottom: 2)
+            ),
+            horizontalAlignment: .leading
+        )
+
+        let cols = TableColumn.configureBorders(
+            in: [col1],
+            uniformStyle: .lightTripleDash,
+            horizontalMargin: "  "
+        )
+
+        let table = Table(columns: cols) {
+            "cell1"
+            "cell2"
+        }
+        let output = table.stringValue
+        XCTAssertEqual(
+            output,
+            """
+            ┌┄┄┄┄┄┄┄┄┄┐
+            ┆  .....  ┆
+            ┆  col1.  ┆
+            ┆  .....  ┆
+            ┆  .....  ┆
+            ├┄┄┄┄┄┄┄┄┄┤
+            ┆  cell1  ┆
+            ┆  cell2  ┆
+            └┄┄┄┄┄┄┄┄┄┘
+            """
+        )
+    }
+
     func testMultiColumnWithHeaderWithConfiguredDoubleBorders() throws {
         let col1 = TableColumn(
             header: TableColumn.Header(
