@@ -170,7 +170,7 @@ extension TableColumn {
         guard lastIndex > 0 else { return }
 
         for index in 1 ..< lastIndex {
-            columns[index].leadingMargin = "\(horizontalMargin)"
+            columns[index].leadingMargin = horizontalMargin
             columns[index].trailingMargin = "\(horizontalMargin)\(style.vertical)"
             columns[index].footer = .init(
                 border: style.horizontal,
@@ -179,7 +179,7 @@ extension TableColumn {
             )
             columns[index].header?.bottomBorder = style.horizontal
             columns[index].header?.topBorder = style.horizontal
-            columns[index].header?.leadingMargin = "\(horizontalMargin)"
+            columns[index].header?.leadingMargin = horizontalMargin
             columns[index].header?.trailingMargin = "\(horizontalMargin)\(style.vertical)"
             columns[index].header?.corners = .init(
                 topLeading: style.horizontal,
@@ -189,7 +189,7 @@ extension TableColumn {
             )
         }
 
-        columns[lastIndex].leadingMargin = "\(horizontalMargin)"
+        columns[lastIndex].leadingMargin = horizontalMargin
         columns[lastIndex].trailingMargin = "\(horizontalMargin)\(style.vertical)"
         columns[lastIndex].footer = .init(
             border: style.horizontal,
@@ -198,7 +198,7 @@ extension TableColumn {
         )
         columns[lastIndex].header?.bottomBorder = style.horizontal
         columns[lastIndex].header?.topBorder = style.horizontal
-        columns[lastIndex].header?.leadingMargin = "\(horizontalMargin)"
+        columns[lastIndex].header?.leadingMargin = horizontalMargin
         columns[lastIndex].header?.trailingMargin = "\(horizontalMargin)\(style.vertical)"
         columns[lastIndex].header?.corners = .init(
             topLeading: style.horizontal,
