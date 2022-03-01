@@ -1,6 +1,6 @@
 #!/bin/sh
 
-MINT="/usr/bin/env mint"
+: "${MINT:=/usr/bin/env mint}"
 
 $MINT run swiftformat --lint --config .swiftformat .
 
