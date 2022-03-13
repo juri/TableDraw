@@ -282,4 +282,68 @@ extension TableColumn {
         self.configureBorders(in: &cols, internalOnlyUniformStyle: style, horizontalMargin: horizontalMargin)
         return cols
     }
+
+    public static func configureBordersWithoutHeaders(
+        in columns: inout [TableColumn],
+        uniformStyle style: TableBorderStyle,
+        horizontalMargin: String = " "
+    ) {
+        guard !columns.isEmpty else { return }
+        let multipleColumns = columns.count > 1
+        columns[0].leadingMargin = "\(style.vertical)\(horizontalMargin)"
+        columns[0].trailingMargin = "\(horizontalMargin)\(style.vertical)"
+        columns[0].footer = .init(
+            border: style.horizontal,
+            leadingCorner: style.upAndRight,
+            trailingCorner: multipleColumns ? style.upAndHorizontal : style.upAndLeft
+        )
+        columns[0].header?.bottomBorder = style.horizontal
+        columns[0].header?.topBorder = nil
+        columns[0].header?.leadingMargin = ""
+        columns[0].header?.trailingMargin = ""
+        columns[0].header?.corners = .defaults
+        columns[0].header?.corners.bottomLeading = style.downAndRight
+
+        let lastIndex = columns.endIndex.advanced(by: -1)
+        guard lastIndex > 0 else { return }
+
+        for index in 1 ..< lastIndex {
+            columns[index].leadingMargin = horizontalMargin
+            columns[index].trailingMargin = "\(horizontalMargin)\(style.vertical)"
+            columns[index].footer = .init(
+                border: style.horizontal,
+                leadingCorner: nil,
+                trailingCorner: style.upAndHorizontal
+            )
+            columns[0].header?.bottomBorder = style.horizontal
+            columns[index].header?.topBorder = nil
+            columns[index].header?.leadingMargin = ""
+            columns[index].header?.trailingMargin = ""
+            columns[index].header?.corners = .defaults
+        }
+
+        columns[lastIndex].leadingMargin = horizontalMargin
+        columns[lastIndex].trailingMargin = "\(horizontalMargin)\(style.vertical)"
+        columns[lastIndex].footer = .init(
+            border: style.horizontal,
+            leadingCorner: style.horizontal,
+            trailingCorner: style.upAndLeft
+        )
+        columns[lastIndex].header?.bottomBorder = style.horizontal
+        columns[lastIndex].header?.topBorder = nil
+        columns[lastIndex].header?.leadingMargin = ""
+        columns[lastIndex].header?.trailingMargin = ""
+        columns[lastIndex].header?.corners = .defaults
+        columns[lastIndex].header?.corners.bottomTrailing = style.downAndLeft
+    }
+
+    public static func configureBordersWithoutHeaders(
+        in columns: [TableColumn],
+        uniformStyle style: TableBorderStyle,
+        horizontalMargin: String = " "
+    ) -> [TableColumn] {
+        var cols = columns
+        self.configureBordersWithoutHeaders(in: &cols, uniformStyle: style, horizontalMargin: horizontalMargin)
+        return cols
+    }
 }
